@@ -1,0 +1,108 @@
+#!/bin/sh
+#==================================================
+# newbourne
+#
+# Generate a default bourne shell script from a
+# template.
+#
+# USEAGE:
+#        newbourne <name of new script>
+#
+# REQUIRES: cat, chmod
+#
+# PATH: ~/bin/newbourne
+#
+# CREATED: Thu Nov 14 14:19:35 CST 2013
+#==================================================
+
+#========================================
+# GLOBAL VARIABLES
+#========================================
+
+#========================================
+# FUNCTIONS
+#========================================
+
+#========================================
+# MAIN ()
+#========================================
+
+#----------------------------------------
+# Parse Commandline
+#----------------------------------------
+SCRIPT=${1}
+
+#1) Write template to file
+cat > ${SCRIPT} << END_OF_FILE
+#!/bin/sh
+#==================================================
+# ${SCRIPT}
+#
+# Description of script goes here.
+#
+# USAGE:
+#       ${SCRIPT} -h
+#
+# REQUIRES: sh,grep,awk,sed
+#
+# PATH: /path/to/${SCRIPT}
+#
+# CREATED: `date`
+#==================================================
+
+#========================================
+# GLOBAL VARIABLES
+#========================================
+
+# USER CONFIGURABLE VARS
+
+# DO NOT EDIT THESE VARS
+
+
+#========================================
+# FUNCTIONS
+#========================================
+usage()
+{
+  echo "usage: \$0 [-v] [-f file] file ..."
+}
+
+
+#========================================
+# MAIN ()
+#========================================
+
+#----------------------------------------
+# Test for valid run conditions
+#----------------------------------------
+
+#..Must be run from console...............
+TEST=\`tty | grep '/dev/tty'\`
+if [ \$? -ne 0 ]; then
+  echo >&2 "ERROR: Must be on console"
+  exit 1
+fi
+
+#..Must be run as root....................
+if [ \`id -u\` -ne 0 ]; then
+  echo >&2 'ERROR: Need to be root'
+  exit 1
+fi
+
+#----------------------------------------
+# Parse Commandline
+#----------------------------------------
+vflag=off
+filename=
+while getopts vf: opt; do
+  case "\$opt" in
+    v)  vflag=on;;
+    f)  filename="\$OPTARG";;
+    \?) usage; exit 1;;
+  esac
+done
+shift \`expr \$OPTIND - 1\`
+END_OF_FILE
+
+#2) Change permssions
+chmod 0755 ${SCRIPT}
