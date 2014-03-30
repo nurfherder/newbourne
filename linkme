@@ -1,8 +1,0 @@
-# Links for newbourne
-
-# Basic Operation
-# cd ${DIR}
-# ln -s ${SRC} ${DST}
-
-#'DirectoryForLink':'LinkPointsTo':'NameOfLink'
-%HOME%/bin:../%HERE%/newbourne:newbourne

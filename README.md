@@ -10,7 +10,7 @@ Deploy:
 **Prereqs:**
 
  * git
- * linkme.sh
+ * [slink](https://github.com/nurfherder/slink)
  * A POSIX shell
 
 **Procedure:**
@@ -24,4 +24,4 @@ Clone repo to your home directory:
 Install into ~/bin:
 
     cd ~/code/bin/newbourne
-    linkme.sh
+    slink
