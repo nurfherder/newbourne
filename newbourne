@@ -62,6 +62,16 @@ cat > ${SCRIPT} << END_OF_FILE
 #========================================
 # FUNCTIONS
 #========================================
+
+#----------------------------------------
+# Print usage to STDOUT
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#----------------------------------------
 usage()
 {
   echo "usage: \$0 [-v] [-f file] file ..."
